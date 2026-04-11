@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String sayHello(@RequestParam(value = "name", defaultValue = "World") String name) {
         return String.format("Hello, %s! Spring Boot is running.", name);
     }   
