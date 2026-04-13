@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .user-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .user-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .user-id {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .user-name {
+            color: #333;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .user-email {
+            color: #007bff;
+            font-size: 1.1em;
+        }
+        .no-users {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 40px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #4facfe;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #3d8bfd;
+        }
+        .nav-links {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Users List</h1>
+        
+        <!-- Success message for user addition -->
+        <div th:if="${message}" class="success-message" th:text="${message}">
+            User added successfully!
+        </div>
+        
+        <!-- Check if users list is empty -->
+        <div th:if="${#lists.isEmpty(users)}" class="no-users">
+            <h3>No users found!</h3>
+            <p>Start by adding your first user.</p>
+        </div>
+        
+        <!-- Display users list -->
+        <div th:unless="${#lists.isEmpty(users)}">
+            <div th:each="user : ${users}" class="user-card">
+                <div class="user-id">ID: <span th:text="${user.id}">1</span></div>
+                <div class="user-name" th:text="${user.name}">John Doe</div>
+                <div class="user-email" th:text="${user.email}">john@example.com</div>
+            </div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="/hello" class="btn">Home</a>
+            <a href="/add-user-form" class="btn">Add New User</a>
+        </div>
+    </div>
+</body>
+</html>
